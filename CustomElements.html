@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        class VolumeSpan extends HTMLElement {
+            constructor() {
+                super();
+
+                this._volume = 80;
+            }
+
+            static get observedAttributes() { return ["volume"]; }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                // name will always be "volume" due to observedAttributes
+                this._volume = newValue;
+                this._updateRendering();
+            }
+
+            connectedCallback() {
+                this._updateRendering();
+            }
+
+            get volume() {
+                return this._volume;
+            }
+
+            set volume(v) {
+                this.setAttribute("volume", v);
+            }
+
+            _updateRendering() {
+                // TODO...
+            }
+        }
+
+        customElements.define("volume-span", VolumeSpan);
+    </script>
+</head>
+<body>
+    <p>
+        This is <em>a <volume-span volume="90">test</volume-span></em>!
+    </p>
+</body>
